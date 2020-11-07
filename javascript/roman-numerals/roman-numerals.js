@@ -15,15 +15,12 @@ const romanSymbols = [
   [1, 'I'],
 ]
 
-const toRomanRecursive = (accumulator, numberLeft) => {
-  const valueToSubtract = romanSymbols.find(([value]) => value <= numberLeft)
+export const toRoman = (number) => {
+  const valueToSubtract = romanSymbols.find(([value]) => value <= number)
   if (valueToSubtract) {
     const [numberToSubtract, symbol] = valueToSubtract
-    return toRomanRecursive(`${accumulator}${symbol}`, numberLeft - numberToSubtract)
+    const accumulator = toRoman(number - numberToSubtract)
+    return `${accumulator}${symbol}`
   }
-  return accumulator
-}
-
-export const toRoman = (number) => {
-  return toRomanRecursive('', number)
+  return ''
 };
